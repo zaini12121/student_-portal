@@ -51,4 +51,4 @@ A professional-grade, full-stack student management portal built with a modern w
 5. **Open index.html**: Just open `index.html` in your favorite browser!
 
 ---
-Developed by **[Your Name]** 🎓✨
+Developed by **M Zain-Ul-Abdin** 🎓✨

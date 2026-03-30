@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Academy | Student Portal</title>
+    <meta name="description" content="A premium student management portal for Stellar Academy.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Login Section -->
+        <section id="loginView" class="auth-container glass-card">
+            <div class="brand-logo" style="text-align: center; margin-bottom: 1.5rem;">
+                <i class="fas fa-graduation-cap" style="font-size: 3rem; color: #6366f1;"></i>
+            </div>
+            <h1>Welcome Back</h1>
+            <p>Access your stellar academic dashboard</p>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username / Roll No.</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary">Login to Portal</button>
+            </form>
+            <div style="margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: #94a3b8;">
+                <button onclick="toggleAdminLogin()" id="adminToggleBtn"
+                    style="background: none; border: none; color: #6366f1; cursor: pointer; text-decoration: underline; font-family: inherit;">Login
+                    as Administrator</button>
+            </div>
+            <div style="margin-top: 1.5rem; text-align: center; font-size: 0.85rem; color: #94a3b8;">
+                Need help? Contact office at <strong>+92 300 0000000</strong>
+            </div>
+        </section>
+
+        <!-- Class Selection Section -->
+        <section id="classSelectionView" class="class-selection-container hidden">
+            <div style="margin-bottom: 3rem;">
+                <h1
+                    style="font-size: 3rem; margin-bottom: 0.5rem; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                    Select Your Standard</h1>
+                <p style="color: #94a3b8; font-size: 1.2rem;">Choose your current academic grade to proceed</p>
+            </div>
+
+            <div class="class-grid">
+                <div class="class-card glass-card" onclick="selectClass(9)">
+                    <i class="fas fa-microscope"></i>
+                    <h3>9 <sup>th</sup></h3>
+                    <p style="color: #94a3b8;">Science & Foundation</p>
+                </div>
+                <div class="class-card glass-card" onclick="selectClass(10)">
+                    <i class="fas fa-book-open-reader"></i>
+                    <h3>10 <sup>th</sup></h3>
+                    <p style="color: #94a3b8;">Secondary Education</p>
+                </div>
+                <div class="class-card glass-card" onclick="selectClass(11)">
+                    <i class="fas fa-calculator"></i>
+                    <h3>11 <sup>th</sup></h3>
+                    <p style="color: #94a3b8;">Intermediate Part I</p>
+                </div>
+                <div class="class-card glass-card" onclick="selectClass(12)">
+                    <i class="fas fa-atom"></i>
+                    <h3>12 <sup>th</sup></h3>
+                    <p style="color: #94a3b8;">Intermediate Part II</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboardView" class="dashboard-container hidden">
+            <div class="dashboard-header glass-card">
+                <div class="user-profile">
+                    <div class="user-avatar" id="avatarName">JS</div>
+                    <div>
+                        <h2 id="studentNameDisplay">Jane Smith</h2>
+                        <p style="color: #94a3b8;" id="studentClassDisplay">Grade 10 | Roll: 10234</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <span id="currentMonth" style="font-weight: 600;">March 2026</span>
+                    <button class="btn-primary" style="margin-top: 0; padding: 0.6rem 1.2rem;"
+                        onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <!-- Fee Status Card -->
+                <div class="stat-card glass-card">
+                    <h4>Monthly Fee Status</h4>
+                    <div class="value" id="feeStatusValue">PAID <i class="fas fa-check-circle status-paid"></i></div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #94a3b8;" id="feeMonthText">For the month of
+                        March</p>
+                </div>
+
+                <!-- Attendance Card -->
+                <div class="stat-card glass-card">
+                    <h4>Attendance (Monthly)</h4>
+                    <div class="value" id="attendanceValue">94% <i class="fas fa-chart-line"
+                            style="color: #6366f1;"></i></div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #94a3b8;">Overall Performance: Excellent</p>
+                </div>
+
+                <!-- Last Update Card -->
+                <div class="stat-card glass-card">
+                    <h4>Upcoming Exam</h4>
+                    <div class="value" style="font-size: 1.2rem;">Mid-Term Finals</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #f59e0b;">Starting in 14 days</p>
+                </div>
+            </div>
+
+            <!-- Fee History -->
+            <div class="glass-card">
+                <h3 style="margin-bottom: 1.5rem;">Recent Fee Invoices</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Invoice No.</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date Paid</th>
+                            </tr>
+                        </thead>
+                        <tbody id="feeHistoryBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Leave Application Form -->
+            <div class="glass-card" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-file-alt"
+                        style="color: #6366f1; margin-right: 0.5rem;"></i> Submit Leave Application</h3>
+                <form id="leaveApplicationForm">
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label for="leaveReason" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Reason
+                            for Leave</label>
+                        <textarea id="leaveReason" rows="3"
+                            style="width: 100%; background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem; color: var(--text-main); font-family: inherit; resize: none;"
+                            placeholder="State your reason clearly..." required></textarea>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="leaveDate"
+                                style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Date</label>
+                            <input type="date" id="leaveDate" required
+                                style="width: 100%; background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem; color: var(--text-main); font-family: inherit;">
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end;">
+                            <button type="submit" class="btn-primary" style="margin: 0; width: 100%;">Submit
+                                Application</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Admin View Section -->
+        <section id="adminView" class="dashboard-container hidden">
+            <div class="dashboard-header glass-card">
+                <div class="user-profile">
+                    <div class="user-avatar" style="background: #ef4444;">AD</div>
+                    <div>
+                        <h2>Admin Control Panel <span class="admin-badge">ADMIN</span></h2>
+                        <p style="color: #94a3b8;">Stellar Academy Management</p>
+                    </div>
+                </div>
+                <button class="btn-primary" style="margin-top: 0; padding: 0.6rem 1.2rem; background: #334155;"
+                    onclick="logout()">Logout</button>
+            </div>
+
+            <div id="adminClassSelection">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;">
+                    <!-- Class Selection Folders -->
+                    <div style="flex: 2;">
+                        <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-folder-open"
+                                style="color: #ef4444; margin-right: 0.5rem;"></i> Manage Classes</h3>
+                        <div class="class-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+                            <div class="class-card glass-card" style="padding: 1.5rem;" onclick="adminSelectClass(9)">
+                                <i class="fas fa-folder" style="font-size: 2.2rem;"></i>
+                                <h3 style="font-size: 1.2rem;">Grade 9</h3>
+                            </div>
+                            <div class="class-card glass-card" style="padding: 1.5rem;" onclick="adminSelectClass(10)">
+                                <i class="fas fa-folder" style="font-size: 2.2rem;"></i>
+                                <h3 style="font-size: 1.2rem;">Grade 10</h3>
+                            </div>
+                            <div class="class-card glass-card" style="padding: 1.5rem;" onclick="adminSelectClass(11)">
+                                <i class="fas fa-folder" style="font-size: 2.2rem;"></i>
+                                <h3 style="font-size: 1.2rem;">Grade 11</h3>
+                            </div>
+                            <div class="class-card glass-card" style="padding: 1.5rem;" onclick="adminSelectClass(12)">
+                                <i class="fas fa-folder" style="font-size: 2.2rem;"></i>
+                                <h3 style="font-size: 1.2rem;">Grade 12</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Student Form -->
+                    <div class="glass-card" style="flex: 1; padding: 1.5rem;">
+                        <h3 style="margin-bottom: 1.2rem;"><i class="fas fa-user-plus"
+                                style="color: #10b981; margin-right: 0.5rem;"></i> Add New Student</h3>
+                        <form id="addStudentForm">
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label style="font-size: 0.8rem;">Full Name</label>
+                                <input type="text" id="newName" placeholder="Full Name" required
+                                    style="padding: 0.6rem;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label style="font-size: 0.8rem;">Roll No. / Username</label>
+                                <input type="text" id="newRoll" placeholder="Username" required
+                                    style="padding: 0.6rem;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1rem;">
+                                <label style="font-size: 0.8rem;">Password</label>
+                                <input type="password" id="newPass" placeholder="••••" required
+                                    style="padding: 0.6rem;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 1.2rem;">
+                                <label style="font-size: 0.8rem;">Class / Grade</label>
+                                <select id="newGrade" required
+                                    style="width: 100%; background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border); border-radius: 12px; padding: 0.6rem; color: var(--text-main); font-family: inherit;">
+                                    <option value="9">Grade 9</option>
+                                    <option value="10">Grade 10</option>
+                                    <option value="11">Grade 11</option>
+                                    <option value="12">Grade 12</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary" style="margin-top: 0; padding: 0.7rem;">Register
+                                Student</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="adminStudentManagement" class="hidden">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                    <h3><i class="fas fa-users" style="color: #ef4444; margin-right: 0.5rem;"></i> <span
+                            id="adminSelectedClassName">Class Records</span></h3>
+                    <div style="display: flex; gap: 1rem; flex-grow: 1; max-width: 500px;">
+                        <div style="position: relative; flex-grow: 1;">
+                            <i class="fas fa-search"
+                                style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+                            <input type="text" id="adminSearchInput" oninput="handleAdminSearch()"
+                                placeholder="Search Name or Roll No..."
+                                style="width: 100%; background: rgba(15, 23, 42, 0.5); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem 1rem 0.8rem 2.8rem; color: var(--text-main); font-family: inherit;">
+                        </div>
+                        <button class="btn-primary"
+                            style="margin: 0; padding: 0.6rem 1.2rem; background: #334155; white-space: nowrap;"
+                            onclick="backToAdminClasses()"><i class="fas fa-arrow-left"></i> Back</button>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Roll No.</th>
+                                    <th>Class</th>
+                                    <th>Fee Status</th>
+                                    <th>Attendance</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminStudentList">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leave Applications Management -->
+            <div class="glass-card" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1.5rem;"><i class="fas fa-envelope-open-text"
+                        style="color: #ef4444; margin-right: 0.5rem;"></i> Pending Leave Applications</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Roll No.</th>
+                                <th>Date</th>
+                                <th>Reason</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminLeaveList">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/student.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+
+</html>
